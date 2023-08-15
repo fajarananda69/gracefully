@@ -34,7 +34,7 @@ func main() {
 
 func StopGracefully(server *http.Server, serverErr chan error) {
 	shutdownChannel := make(chan os.Signal, 1)
-	signal.Notify(shutdownChannel, syscall.SIGINT)
+	signal.Notify(shutdownChannel, syscall.SIGTERM, syscall.SIGINT, syscall.SIGKILL)
 
 	select {
 	case sig := <-shutdownChannel:
